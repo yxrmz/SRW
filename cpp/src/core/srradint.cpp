@@ -336,6 +336,12 @@ int srTRadInt::ComputeTotalRadDistrDirectOut(srTSRWRadStructAccessData& SRWRadSt
 	//long AbsPtCount = 0;
 	ObsCoor.y = DistrInfoDat.yStart;
 	ObsCoor.z = DistrInfoDat.zStart;
+
+	//XRT code to be injected here
+
+	//ObsCoor
+
+
 	for(int iz=0; iz<DistrInfoDat.nz; iz++)
 	{
 		if(FinalResAreSymOverZ) { if((ObsCoor.z - zc) > zTol) break;}
@@ -3556,6 +3562,7 @@ void srTRadInt::ComputeElectricFieldFreqDomain(srTTrjDat* pTrjDat, srTWfrSmp* pW
 
 	if(res = CheckInputConsistency()) throw res;
 	if(res = ComputeTotalRadDistrDirectOut(*pWfr, showProgressInd)) throw res;
+	//pWfr->
 
 	srTGenOptElem GenOptElem;
 	if(res = GenOptElem.ComputeRadMoments(pWfr)) throw res;

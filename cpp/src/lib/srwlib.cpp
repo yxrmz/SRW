@@ -26,6 +26,7 @@
 #include "srpersto.h"
 #include "srpowden.h"
 #include "srisosrc.h"
+#include "xrtlib.h"
 
 //-------------------------------------------------------------------------
 // Global Variables (used in SRW/SRWLIB, some may be obsolete)
@@ -428,6 +429,12 @@ EXP int CALL srwlCalcElecFieldSR(SRWLWfr* pWfr, SRWLPrtTrj* pTrj, SRWLMagFldC* p
 		}
 		else pWfr->partBeam.partStatMom1 = pTrj->partInitCond;
 
+		//printf("%s \n", pMagFld->arMagFldTypes);
+		//printf("%i \n", pMagFld->nElem);
+		SRWLMagFldU *pFldU = (SRWLMagFldU*)(pMagFld->arMagFld[0]);
+		SRWLMagFldH pFldH = (SRWLMagFldH)(pFldU->arHarm[0]);
+		//printf("%g \n", pFldU->per);
+		//printf("hField %g T, hN %g, hPhase %g \n", pFldH.B, pFldH.n, pFldH.ph);
 		srTTrjDat trjData(pTrj); //this calculates interpolating structure required for SR calculation
 		trjData.EbmDat.SetCurrentAndMom2(pWfr->partBeam.Iavg, pWfr->partBeam.arStatMom2, 21);
 
@@ -445,6 +452,22 @@ EXP int CALL srwlCalcElecFieldSR(SRWLWfr* pWfr, SRWLPrtTrj* pTrj, SRWLMagFldC* p
 		srTParPrecElecFld precElecFld((int)precPar[0], precPar[1], precPar[2], precPar[3], precPar[6], false, calcTerminTerms);
 
         srTRadInt RadInt;
+
+		if (true) {
+			xrtRadIntCL xrtRadInt;
+			double xrtPars[8];
+
+			xrtPars[0] = 0;  //Bx
+			xrtPars[1] = pFldH.B;  //By
+			xrtPars[2] = pFldH.ph;  //phase
+			xrtPars[3] = pFldU->per;  //period length
+			xrtPars[4] = pFldU->nPer;  //number of periods
+			xrtPars[5] = pWfr->partBeam.Iavg;  // Ring current
+			xrtPars[6] = 0;
+			xrtPars[7] = 0;
+			xrtRadInt.calcSRField(xrtPars, &wfr);
+		}
+
 		RadInt.ComputeElectricFieldFreqDomain(&trjData, &auxSmp, &precElecFld, &wfr, 0);
 		wfr.OutSRWRadPtrs(*pWfr);
 		UtiWarnCheck();

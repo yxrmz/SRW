@@ -6,10 +6,12 @@
 #############################################################################
 
 from __future__ import print_function #Python 2.7 compatibility
+import sys
+import os
+#sys.path.append(os.path.join('..', '..'))
+#sys.path.append(r'D:\SRW\cpp\vc')
 from srwlib import *
 #from uti_plot import * #required for plotting
-import os
-import sys
 
 print('SRWLIB Extended Example # 6:')
 print('Calculating spectral flux of undulator radiation by finite-emittance electron beam collected through a finite aperture and power density distribution of this radiation (integrated over all photon energies)')
@@ -81,7 +83,7 @@ arPrecP[3] = 0 #final longitudinal position (effective if arPrecP[2] < arPrecP[3
 arPrecP[4] = 20000 #number of points for (intermediate) trajectory calculation
 
 arPrecS = [0]*7 #for electric field and single-electron intensity
-arPrecS[0] = 1 #SR calculation method: 0- "manual", 1- "auto-undulator", 2- "auto-wiggler"
+arPrecS[0] = 1 #SR calculation method: 0- "manual", 1- "auto-undulator", 2- "auto-wiggler", 3 - "xrt_cl"
 arPrecS[1] = 0.01 #relative precision
 arPrecS[2] = 0 #longitudinal position to start integration (effective if < zEndInteg)
 arPrecS[3] = 0 #longitudinal position to finish integration (effective if > zStartInteg)

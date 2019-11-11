@@ -1,0 +1,2 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1216,5): warning MSB8012: TargetPath(D:\SRW\cpp\vc\srwlpy.pyd) does not match the Linker's OutputFile property value (D:\SRW\env\work\srw_python\srwlpy.pyd). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+  SRWLClientPython.vcxproj -> D:\SRW\cpp\vc\srwlpy.pyd

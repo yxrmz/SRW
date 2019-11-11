@@ -1,0 +1,3 @@
+﻿  srwlib.cpp
+d:\srw\cpp\src\lib\srwlib.cpp(436): warning C4477: 'printf' : format string '%g' requires an argument of type 'double', but variadic argument 2 has type 'int'
+  SRWLIB.vcxproj -> D:\SRW\cpp\vc\srw_x64.lib
